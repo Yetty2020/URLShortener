@@ -1,6 +1,6 @@
+import React from 'react'
 
-
-const redirectLandingPage = () => {
+function redirectLandingPage() {
   return (
     <div>
       
