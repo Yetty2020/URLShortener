@@ -1,5 +1,6 @@
 
 import { Link } from 'react-router-dom'
+import { Button } from './ui/button'
 
 function Header() {
   return (
@@ -8,6 +9,9 @@ function Header() {
         <h3>Shortener</h3>
 
         </Link>
+        <div>
+            <Button/>
+        </div>
     </nav>
   )
 }
