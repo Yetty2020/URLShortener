@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu"
 import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from './ui/avatar'
-import { LogOut } from 'lucide-react'
+import { Link2Icon, LogOut } from 'lucide-react'
 
 function Header() {
     const navigate = useNavigate()
@@ -26,7 +26,7 @@ function Header() {
             {
                 !user ? (
                     <DropdownMenu>
-  <DropdownMenuTrigger asChild>
+  <DropdownMenuTrigger asChild className='w-10 overflow-hidden rounded-full'>
    <Avatar>
   <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
   <AvatarFallback>CN</AvatarFallback>
@@ -42,10 +42,14 @@ function Header() {
     </DropdownMenuGroup>
    
     <DropdownMenuGroup>
-            <DropdownMenuItem>My Links</DropdownMenuItem>
+            <DropdownMenuItem>
+                <Link2Icon/>
+                <span>   My Links</span>
+              </DropdownMenuItem>
         <DropdownMenuItem className='text-red-400'>
             <LogOut className='mr-2'/>
-            Logout</DropdownMenuItem>
+            <span>Logout</span>
+            </DropdownMenuItem>
    
     </DropdownMenuGroup>
   </DropdownMenuContent>
