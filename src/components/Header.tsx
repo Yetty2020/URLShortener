@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu"
+import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from './ui/avatar'
 
 function Header() {
     const navigate = useNavigate()
@@ -25,18 +26,22 @@ function Header() {
                 !user ? (
                     <DropdownMenu>
   <DropdownMenuTrigger asChild>
-    <Button variant="outline">Open</Button>
+   <Avatar>
+  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+  <AvatarFallback>CN</AvatarFallback>
+  <AvatarBadge className="bg-green-600 dark:bg-green-800" />
+</Avatar>
   </DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuGroup>
-      <DropdownMenuLabel>My Account</DropdownMenuLabel>
-      <DropdownMenuItem>Profile</DropdownMenuItem>
-      <DropdownMenuItem>Billing</DropdownMenuItem>
+      <DropdownMenuLabel>Fatihah Adetoro</DropdownMenuLabel>
+      <DropdownMenuItem>My Links</DropdownMenuItem>
+    
     </DropdownMenuGroup>
     <DropdownMenuSeparator />
     <DropdownMenuGroup>
-      <DropdownMenuItem>Team</DropdownMenuItem>
-      <DropdownMenuItem>Subscription</DropdownMenuItem>
+        <DropdownMenuItem>Logout</DropdownMenuItem>
+   
     </DropdownMenuGroup>
   </DropdownMenuContent>
 </DropdownMenu>
