@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu"
 import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from './ui/avatar'
+import { LogOut } from 'lucide-react'
 
 function Header() {
     const navigate = useNavigate()
@@ -35,12 +36,16 @@ function Header() {
   <DropdownMenuContent>
     <DropdownMenuGroup>
       <DropdownMenuLabel>Fatihah Adetoro</DropdownMenuLabel>
-      <DropdownMenuItem>My Links</DropdownMenuItem>
+       <DropdownMenuSeparator />
+  
     
     </DropdownMenuGroup>
-    <DropdownMenuSeparator />
+   
     <DropdownMenuGroup>
-        <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem>My Links</DropdownMenuItem>
+        <DropdownMenuItem className='text-red-400'>
+            <LogOut className='mr-2'/>
+            Logout</DropdownMenuItem>
    
     </DropdownMenuGroup>
   </DropdownMenuContent>
