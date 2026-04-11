@@ -1,8 +1,9 @@
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from './ui/button'
 
 function Header() {
+    const navigate = useNavigate()
   return (
     <nav>
         <Link to="/" className='text-2xl font-bold text-gray-800'>
@@ -10,7 +11,7 @@ function Header() {
 
         </Link>
         <div>
-            <Button/>
+            <Button onClick={() => {navigate("/auth")}}>Login</Button>
         </div>
     </nav>
   )
