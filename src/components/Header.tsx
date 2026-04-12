@@ -25,6 +25,9 @@ function Header() {
         <div>
             {
                 !user ? (
+                    <Button onClick={() => {navigate("/auth")}} variant='outline'>Login</Button>
+                    
+                ) : (
                     <DropdownMenu>
   <DropdownMenuTrigger asChild className='w-10 overflow-hidden rounded-full'>
    <Avatar>
@@ -54,8 +57,7 @@ function Header() {
     </DropdownMenuGroup>
   </DropdownMenuContent>
 </DropdownMenu>
-                ) : (
-                    <Button onClick={() => {navigate("/auth")}} variant='outline'>Login</Button>
+                    
 
                 )
             }
