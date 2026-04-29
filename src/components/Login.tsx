@@ -10,8 +10,22 @@ import {
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { BeatLoader } from "react-spinners"
+import Error from "./Error"
+import { useState } from "react"
 
 function Login() {
+  // to set initial state for the form data
+  const [formData, setFormData] = useState({email: "", password: ""})
+
+  // to handle input change
+  const handleInputChange = (e) =>{
+    const {name, value} = e.target
+    setFormData((prevState)=>({
+      ...prevState, [name]: value
+
+    }))
+
+  }
   return (
    <Card>
   <CardHeader>
@@ -21,12 +35,14 @@ function Login() {
   </CardHeader>
   <CardContent>
     <div>
-      <Input name="email" type="email" placeholder="Email" />
+      <Input name="email" type="email" placeholder="Email" onChange={handleInputChange} />
+      <Error message={"Please enter a valid email address"}/>
 
     </div>
     
    <div>
-     <Input name="password" type="password" placeholder="Enter Password" />
+     <Input name="password" type="password" placeholder="Enter Password" onChange={handleInputChange}  />
+     <Error message={"Please enter a valid email address"}/>
    </div>
    
   </CardContent>
