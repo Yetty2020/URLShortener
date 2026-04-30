@@ -14,6 +14,8 @@ import Error from "./Error"
 import { useState } from "react"
 
 function Login() {
+  //to validate input
+  const [errors, setErrors] = useState([])
   // to set initial state for the form data
   const [formData, setFormData] = useState({email: "", password: ""})
 
@@ -22,8 +24,12 @@ function Login() {
     const {name, value} = e.target
     setFormData((prevState)=>({
       ...prevState, [name]: value
-
+ 
     }))
+
+  }
+
+  const handleLogin = () =>{
 
   }
   return (
@@ -47,7 +53,7 @@ function Login() {
    
   </CardContent>
   <CardFooter>
-  <Button variant="outline">{true? <BeatLoader color="red" size={10} /> : "Login"}</Button>
+  <Button variant="outline" onClick={handleLogin}>{true? <BeatLoader color="red" size={10} /> : "Login"} </Button>
     <CardAction>Card Action</CardAction>
   </CardFooter>
 </Card>
