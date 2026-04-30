@@ -54,7 +54,7 @@ function Login() {
   </CardContent>
   <CardFooter>
   <Button variant="outline" onClick={handleLogin}>{true? <BeatLoader color="red" size={10} /> : "Login"} </Button>
-    <CardAction>Card Action</CardAction>
+   
   </CardFooter>
 </Card>
   )
