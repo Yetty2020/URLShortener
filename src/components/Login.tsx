@@ -1,62 +1,105 @@
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
+
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { BeatLoader } from "react-spinners"
-import Error from "./Error"
-import { useState } from "react"
+import { Controller, useForm } from "react-hook-form"
+import {type  LoginData, loginSchema } from "@/lib/validations/auth"
+import { zodResolver } from "@hookform/resolvers/zod"
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field"
 
 function Login() {
-  //to validate input
-  const [errors, setErrors] = useState([])
-  // to set initial state for the form data
-  const [formData, setFormData] = useState({email: "", password: ""})
+  // 1. Initialize React Hook Form
+  const form = useForm<LoginData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  })
 
-  // to handle input change
-  const handleInputChange = (e) =>{
-    const {name, value} = e.target
-    setFormData((prevState)=>({
-      ...prevState, [name]: value
- 
-    }))
-
+  // 2. Submit Handler
+  const onSubmit = (data: LoginData) => {
+    console.log("Validated Login Data:", data);
+    // Trigger your Supabase login here
   }
 
-  const handleLogin = () =>{
-
-  }
   return (
-   <Card>
-  <CardHeader>
-    <CardTitle>Login</CardTitle>
-    <CardDescription>Login to your account if you already have one</CardDescription>
-    
-  </CardHeader>
-  <CardContent>
-    <div>
-      <Input name="email" type="email" placeholder="Email" onChange={handleInputChange} />
-      <Error message={"Please enter a valid email address"}/>
+    <Card>
+      <CardHeader>
+        <CardTitle>Login</CardTitle>
+        <CardDescription>Login to your account</CardDescription>
+      </CardHeader>
+      
+      <CardContent>
+        {/* We use a standard HTML form and link it to RHF's handleSubmit */}
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FieldGroup className="space-y-4">
+            
+            {/* EMAIL FIELD */}
+            <Controller
+              name="email"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel>Email</FieldLabel>
+                  <Input
+                    {...field}
+                    placeholder="example@gmail.com"
+                    aria-invalid={fieldState.invalid}
+                  />
+                  {/* Shows the Zod error message if the field is invalid */}
+                  {fieldState.invalid && (
+                    <FieldError>{fieldState.error?.message}</FieldError>
+                  )}
+                </Field>
+              )}
+            />
 
-    </div>
-    
-   <div>
-     <Input name="password" type="password" placeholder="Enter Password" onChange={handleInputChange}  />
-     <Error message={"Please enter a valid email address"}/>
-   </div>
-   
-  </CardContent>
-  <CardFooter>
-  <Button variant="outline" onClick={handleLogin}>{true? <BeatLoader color="red" size={10} /> : "Login"} </Button>
-   
-  </CardFooter>
-</Card>
+            {/* PASSWORD FIELD */}
+            <Controller
+              name="password"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel>Password</FieldLabel>
+                  <Input
+                    {...field}
+                    type="password"
+                    placeholder="••••••••"
+                    aria-invalid={fieldState.invalid}
+                  />
+                  {fieldState.invalid && (
+                    <FieldError>{fieldState.error?.message}</FieldError>
+                  )}
+                </Field>
+              )}
+            />
+
+          </FieldGroup>
+
+         
+          <Button type="submit" className="w-full mt-6" variant="outline">
+            {form.formState.isSubmitting ? (
+              <BeatLoader color="red" size={10} />
+            ) : (
+              "Login"
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   )
 }
 
