@@ -21,6 +21,7 @@ import {
 import useFetch from "@/hooks/use-fetch"
 import { login } from "@/db/apiAuth"
 import { useEffect } from "react"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 function Login() {
   // 1. Initialize React Hook Form
@@ -34,11 +35,18 @@ function Login() {
 
   const {loading, error, data , fn: fnLogin} = useFetch(login)
 
+  //to direct to the dashboard page after successful login
+  const navigate = useNavigate()
+  const  [searchParams] = useSearchParams();
+  const longLink = searchParams.get("createNew")
+  
+
 
   useEffect(() =>{
-    // if (error === null && data){
+    if (error === null && data){
+      navigate(`/dashboard?${longLink ? `createNew=${longLink}` : "" }`)
 
-    // }
+    }
     console.log(data)
 
   }, [data, error])
