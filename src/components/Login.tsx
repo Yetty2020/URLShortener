@@ -18,6 +18,9 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
+import useFetch from "@/hooks/use-fetch"
+import { login } from "@/db/apiAuth"
+import { useEffect } from "react"
 
 function Login() {
   // 1. Initialize React Hook Form
@@ -29,11 +32,26 @@ function Login() {
     },
   })
 
+  const {loading, error, data , fn: fnLogin} = useFetch(login)
+
+
+  useEffect(() =>{
+    // if (error === null && data){
+
+    // }
+    console.log(data)
+
+  }, [data, error])
+  
+
   // 2. Submit Handler
-  const onSubmit = (data: LoginData) => {
+  const onSubmit = async (data: LoginData) => {
     console.log("Validated Login Data:", data);
     // Trigger your Supabase login here
+    await fnLogin(data)
   }
+
+  
 
   return (
     <Card>
@@ -91,7 +109,7 @@ function Login() {
 
          
           <Button type="submit" className="w-full mt-6" variant="outline">
-            {form.formState.isSubmitting ? (
+            {loading ? (
               <BeatLoader color="red" size={10} />
             ) : (
               "Login"
