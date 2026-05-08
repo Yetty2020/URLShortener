@@ -43,7 +43,7 @@ function Login() {
 
 
   useEffect(() =>{
-    if (error === null && data){
+    if (!error && data){
       navigate(`/dashboard?${longLink ? `createNew=${longLink}` : "" }`)
 
     }

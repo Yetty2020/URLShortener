@@ -11,3 +11,11 @@ export async function login({email, password}: {email: string, password: string}
         return data
 
 }
+
+export async function getCurrentUser(): Promise<User | null>{
+    const {data: session, error} = await supabase.auth.getSession();
+    if (!session.session) return null
+
+    if (error) throw new Error(error.message)
+        return session.session?.user
+}
